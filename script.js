@@ -31,25 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Clients Data
-    const clients = [
-        "HiLITE Mall", "Preethi Silks", "JOCKEY", "Amul", "U.S. POLO ASSN.",
-        "FOSSIL", "MYOP", "Pizza Hut", "R&B", "purplle", "MOUZY",
-        "Yummy Fried Chicken", "SHAASHOPY", "Nattu Ruchi", "Phone Case",
-        "ICE MAGIC", "Almaaz Shawarma", "ESTHARA JEWELS", "ARROW", "WOW! MOMO",
-        "WOW! CHINA", "19:46", "my specx"
+    // Clients Logos Marquee
+    const clientLogos = [
+        "HiLITE.png", "HiLITE Mall.png", "PREETHI SILKS.png", "JOCKEY.png", "Amul.png", "US POLO ASSN.png", "FOSSIL.png", "MYOP.png",
+        "Pizza Hut.png", "RandB.png", "purplle.png", "MOUZY.png", "Yummy Fried Chicken.png", "SHAASHOPY.png", "Nattu Ruchi.png", "Phone Case.png", "ICE MAGIC.png",
+        "Almaaz Shawarma.png", "Square E.png", "ESTHARA JEWELS.png", "ARROW.png", "WOW MOMO.png", "WOW CHINA.png", "19-46.png", "my specx.png"
     ];
 
-    const clientsGrid = document.querySelector('.clients-grid');
+    const clientsTrack = document.getElementById('clientsTrack');
 
-    if (clientsGrid) {
-        clients.forEach((client, index) => {
-            const delayClass = `delay-${(index % 3) + 1}`;
-            const clientCard = document.createElement('div');
-            clientCard.className = `client-card fade-in-up ${delayClass}`;
-            clientCard.innerHTML = `<span>${client}</span>`;
-            clientsGrid.appendChild(clientCard);
-        });
+    if (clientsTrack) {
+        // Function to create and append logo items
+        const appendLogos = () => {
+            clientLogos.forEach(logo => {
+                const logoItem = document.createElement('div');
+                logoItem.className = 'client-logo-item';
+                logoItem.innerHTML = `<img src="logos/${logo}" alt="Client Logo">`;
+                clientsTrack.appendChild(logoItem);
+            });
+        };
+
+        // Create the initial set
+        appendLogos();
+        // Duplicate the set for seamless infinite scroll
+        appendLogos();
     }
 
     // Set Current Year in Footer

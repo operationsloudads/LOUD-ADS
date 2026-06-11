@@ -128,7 +128,7 @@ ul {
 .logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.2rem;
 }
 
 .brand-logo {
@@ -384,35 +384,77 @@ ul {
     font-size: 1.3rem;
 }
 
-/* Clients Section */
-.clients-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1.5rem;
+/* Clients Section Marquee */
+.clients-marquee {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-light);
+    padding: 2rem 0;
+}
+
+.clients-marquee::before,
+.clients-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+}
+
+.clients-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-light) 0%, transparent 100%);
+}
+
+.clients-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-light) 0%, transparent 100%);
+}
+
+.clients-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 40s linear infinite;
+    gap: 2rem;
     align-items: center;
 }
 
-.client-card {
-    background: var(--bg-white);
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--primary-blue);
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: var(--transition);
+.clients-track:hover {
+    animation-play-state: paused;
+}
+
+.client-logo-item {
+    width: 150px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    background: transparent;
+    transition: var(--transition);
+    padding: 10px;
+    flex-shrink: 0;
 }
 
-.client-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-red);
+.client-logo-item:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.client-logo-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 /* Services Section */
@@ -666,6 +708,23 @@ ul {
 }
 
 @media (max-width: 768px) {
+    .section {
+        padding: 3.5rem 0;
+    }
+
+    .brand-logo {
+        height: 50px;
+    }
+
+    .logo-text {
+        font-size: 1.6rem;
+    }
+
+    .clients-marquee::before,
+    .clients-marquee::after {
+        width: 50px;
+    }
+
     .mobile-menu-btn {
         display: flex;
     }
@@ -689,7 +748,7 @@ ul {
     }
     
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
     
     .goals-grid {
